@@ -1,4 +1,6 @@
+<!doctype html>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>탐어 지도</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
 <style>
@@ -62,16 +64,37 @@ body{margin:0;background:var(--ground);color:var(--ink);font:14px/1.5 "IBM Plex 
 #legend i{display:inline-block;width:10px;height:10px;border-radius:50%}
 #legend .line{width:16px;height:2px;border-radius:0}
 #hint{position:absolute;left:50%;top:12px;transform:translateX(-50%);z-index:1000;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:4px 10px;font-size:12px;color:var(--ink-2)}
+#panel header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+#toggle{display:none;border:0;background:none;color:var(--ink-2);font:inherit;font-size:20px;line-height:1;padding:4px 6px;cursor:pointer}
+.leaflet-popup-content{max-width:calc(100vw - 70px)}
 @media (max-width:640px){
-  #panel{left:8px;right:8px;width:auto;top:auto;bottom:8px;max-height:50vh}
+  /* 하단 시트: 접힘 = 제목줄+집계, 펼침 = 62dvh. 제목 탭으로 토글 */
+  #panel{left:0;right:0;width:auto;top:auto;bottom:0;max-height:62dvh;border-radius:14px 14px 0 0;border-bottom:0;padding-bottom:env(safe-area-inset-bottom);transition:max-height .25s ease}
+  #panel::before{content:"";display:block;width:36px;height:4px;border-radius:2px;background:var(--line);margin:8px auto 0}
+  #panel header{padding:6px 16px 8px;cursor:pointer}
+  #panel h1{font-size:17px}
+  #panel h1 small{margin-top:2px}
+  #toggle{display:block}
+  #panel.closed{max-height:none}
+  #panel.closed #controls,#panel.closed #list{display:none}
+  #panel.closed #toggle{transform:rotate(180deg)}
+  #controls{gap:10px}
+  #q,#place{padding:10px 12px;font-size:16px}  /* iOS 자동 확대 방지 */
+  #ymin{height:28px}
+  .sp{padding:10px 16px;min-height:44px;box-sizing:border-box}
+  .sp input{width:18px;height:18px}
   #legend,#hint{display:none}
+  .leaflet-control-zoom{display:none}  /* 핀치 줌 사용 */
+  .leaflet-touch .leaflet-bar a.locate{width:40px;height:40px;line-height:40px;font-size:20px}
+  .leaflet-top.leaflet-right{top:env(safe-area-inset-top)}
 }
+@media (prefers-reduced-motion:reduce){#panel{transition:none}}
 @media (prefers-reduced-motion:no-preference){.sp{transition:background .15s}}
 </style>
 <div id="map"></div>
 <div id="hint">지점 반경 3 km 집계: 지도를 클릭</div>
 <aside id="panel">
-  <header><h1>탐어 지도<small>GBIF 출현 기록 · 전국 · 담수어·새우·다슬기</small></h1></header>
+  <header><h1>탐어 지도<small>GBIF 출현 기록 · 전국 · 담수어·새우·다슬기</small></h1><button id="toggle" type="button" aria-label="패널 접기/펼치기" aria-expanded="true">⌄</button></header>
   <div id="controls">
     <input id="place" type="search" placeholder="지명·하천명으로 이동 (예: 고산천, 함양)" aria-label="지명 검색" list="places">
     <datalist id="places"></datalist>
@@ -197,6 +220,7 @@ function locate(btn){
     L.circle([lat,lon],{radius:Math.min(accuracy,3000),color:css('--pt'),weight:1,fillOpacity:.08,interactive:false}).addTo(meLayer);
     const m=L.marker([lat,lon],{icon:L.divIcon({className:'',html:'<div class="me"></div>',iconSize:[14,14],iconAnchor:[7,7]}),zIndexOffset:1000}).addTo(meLayer);
     m.bindPopup(()=>summarize(lat,lon,`현위치 — ${nearMuni(lat,lon)}`));
+    if(mobile.matches) setSheet(false);
     map.setView([lat,lon],Math.max(map.getZoom(),11));
     m.openPopup();
   },err=>{
@@ -214,7 +238,12 @@ function drawSpots(){
     m.on('click',()=>m.bindPopup(summarize(lat,lon,name)).openPopup());
   }
 }
-map.on('click',e=>{ if(map.getZoom()<9) return; L.popup().setLatLng(e.latlng).setContent(summarize(e.latlng.lat,e.latlng.lng,`${nearMuni(e.latlng.lat,e.latlng.lng)}<br><span style="font-weight:400;font-size:12px;color:${css('--ink-2')}">${e.latlng.lat.toFixed(3)}, ${e.latlng.lng.toFixed(3)}</span>`)).openOn(map); });
+// 모바일 하단 시트 토글
+const panel=document.getElementById('panel'), toggle=document.getElementById('toggle'), mobile=matchMedia('(max-width:640px)');
+function setSheet(open){ panel.classList.toggle('closed',!open); toggle.setAttribute('aria-expanded',String(open)); }
+panel.querySelector('header').addEventListener('click',()=>{ if(mobile.matches) setSheet(panel.classList.contains('closed')); });
+if(mobile.matches) setSheet(false);
+map.on('click',e=>{ if(mobile.matches) setSheet(false); if(map.getZoom()<9) return; L.popup().setLatLng(e.latlng).setContent(summarize(e.latlng.lat,e.latlng.lng,`${nearMuni(e.latlng.lat,e.latlng.lng)}<br><span style="font-weight:400;font-size:12px;color:${css('--ink-2')}">${e.latlng.lat.toFixed(3)}, ${e.latlng.lng.toFixed(3)}</span>`)).openOn(map); });
 // 지명 검색: 시군명 + 하천명
 const place=document.getElementById('place'), dl=document.getElementById('places');
 const gaz=new Map();
@@ -224,7 +253,7 @@ function buildGaz(){
   for(const [name,p] of RLABELS) if(!gaz.has(name)) gaz.set(name,[L.latLng(p[0],p[1]),12]);
   dl.innerHTML=[...gaz.keys()].sort().map(n=>`<option value="${n}">`).join('');
 }
-function goPlace(){ const v=place.value.trim(); if(!v) return; let g=gaz.get(v); if(!g){ const k=[...gaz.keys()].find(n=>n.startsWith(v))||[...gaz.keys()].find(n=>n.includes(v)); if(k){ g=gaz.get(k); place.value=k; } } if(g) map.setView(g[0],g[1]); }
+function goPlace(){ const v=place.value.trim(); if(!v) return; let g=gaz.get(v); if(!g){ const k=[...gaz.keys()].find(n=>n.startsWith(v))||[...gaz.keys()].find(n=>n.includes(v)); if(k){ g=gaz.get(k); place.value=k; } } if(g){ map.setView(g[0],g[1]); if(mobile.matches){ place.blur(); setSheet(false); } } }
 place.onchange=goPlace; place.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); goPlace(); } });
 q.oninput=buildList; ymin.oninput=obsonly.onchange=render;
 map.on('zoomend',()=>{drawRivers();drawLabels();}); map.on('moveend',drawLabels);
