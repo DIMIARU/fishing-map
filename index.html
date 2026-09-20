@@ -1,0 +1,235 @@
+<meta charset="utf-8">
+<title>탐어 지도</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+<style>
+.leaflet-image-layer,.leaflet-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane,.leaflet-pane>canvas,.leaflet-pane>svg,.leaflet-tile,.leaflet-tile-container,.leaflet-zoom-box{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-tile::selection{background:0 0}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-container .leaflet-overlay-pane svg{max-width:none!important;max-height:none!important}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer{max-width:none!important;max-height:none!important;width:auto;padding:0}.leaflet-container img.leaflet-tile{mix-blend-mode:plus-lighter}.leaflet-container.leaflet-touch-zoom{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{-ms-touch-action:pinch-zoom;touch-action:none;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{-ms-touch-action:none;touch-action:none}.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,.4)}.leaflet-tile{filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;-moz-box-sizing:border-box;box-sizing:border-box;z-index:800}.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-bottom,.leaflet-top{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-popup{opacity:0;-webkit-transition:opacity .2s linear;-moz-transition:opacity .2s linear;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{-webkit-transform-origin:0 0;-ms-transform-origin:0 0;transform-origin:0 0}svg.leaflet-zoom-animated{will-change:transform}.leaflet-zoom-anim .leaflet-zoom-animated{-webkit-transition:-webkit-transform .25s cubic-bezier(0,0,.25,1);-moz-transition:-moz-transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1)}.leaflet-pan-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-tile{-webkit-transition:none;-moz-transition:none;transition:none}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:-webkit-grab;cursor:-moz-grab;cursor:grab}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}.leaflet-control,.leaflet-popup-pane{cursor:auto}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:move;cursor:-webkit-grabbing;cursor:-moz-grabbing;cursor:grabbing}.leaflet-image-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-image-layer.leaflet-interactive,.leaflet-marker-icon.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path{pointer-events:visiblePainted;pointer-events:auto}.leaflet-container{background:#ddd;outline-offset:1px}.leaflet-container a{color:#0078a8}.leaflet-zoom-box{border:2px dotted #38f;background:rgba(255,255,255,.5)}.leaflet-container{font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;font-size:12px;font-size:.75rem;line-height:1.5}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.65);border-radius:4px}.leaflet-bar a{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:#000}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block}.leaflet-bar a:focus,.leaflet-bar a:hover{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:bold 18px 'Lucida Console',Monaco,monospace;text-indent:1px}.leaflet-touch .leaflet-control-zoom-in,.leaflet-touch .leaflet-control-zoom-out{font-size:22px}.leaflet-control-layers{box-shadow:0 1px 5px rgba(0,0,0,.4);background:#fff;border-radius:5px}.leaflet-control-layers-toggle{background-image:url(images/layers.png);width:36px;height:36px}.leaflet-retina .leaflet-control-layers-toggle{background-image:url(images/layers-2x.png);background-size:26px 26px}.leaflet-touch .leaflet-control-layers-toggle{width:44px;height:44px}.leaflet-control-layers .leaflet-control-layers-list,.leaflet-control-layers-expanded .leaflet-control-layers-toggle{display:none}.leaflet-control-layers-expanded .leaflet-control-layers-list{display:block;position:relative}.leaflet-control-layers-expanded{padding:6px 10px 6px 6px;color:#333;background:#fff}.leaflet-control-layers-scrollbar{overflow-y:scroll;overflow-x:hidden;padding-right:5px}.leaflet-control-layers-selector{margin-top:2px;position:relative;top:1px}.leaflet-control-layers label{display:block;font-size:13px;font-size:1.08333em}.leaflet-control-layers-separator{height:0;border-top:1px solid #ddd;margin:5px -10px 5px -6px}.leaflet-default-icon-path{background-image:url(images/marker-icon.png)}.leaflet-container .leaflet-control-attribution{background:#fff;background:rgba(255,255,255,.8);margin:0}.leaflet-control-attribution,.leaflet-control-scale-line{padding:0 5px;color:#333;line-height:1.4}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:focus,.leaflet-control-attribution a:hover{text-decoration:underline}.leaflet-attribution-flag{display:inline!important;vertical-align:baseline!important;width:1em;height:.6669em}.leaflet-left .leaflet-control-scale{margin-left:5px}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;white-space:nowrap;-moz-box-sizing:border-box;box-sizing:border-box;background:rgba(255,255,255,.8);text-shadow:1px 1px #fff}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers{box-shadow:none}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-layers{border:2px solid rgba(0,0,0,.2);background-clip:padding-box}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px}.leaflet-popup-content{margin:13px 24px 13px 20px;line-height:1.3;font-size:13px;font-size:1.08333em;min-height:1px}.leaflet-popup-content p{margin:17px 0;margin:1.3em 0}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-top:-1px;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;pointer-events:auto;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#fff;color:#333;box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:0 0}.leaflet-container a.leaflet-popup-close-button:focus,.leaflet-container a.leaflet-popup-close-button:hover{color:#585858}.leaflet-popup-scrolled{overflow:auto}.leaflet-oldie .leaflet-popup-content-wrapper{-ms-zoom:1}.leaflet-oldie .leaflet-popup-tip{width:24px;margin:0 auto}.leaflet-oldie .leaflet-control-layers,.leaflet-oldie .leaflet-control-zoom,.leaflet-oldie .leaflet-popup-content-wrapper,.leaflet-oldie .leaflet-popup-tip{border:1px solid #999}.leaflet-div-icon{background:#fff;border:1px solid #666}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.4)}.leaflet-tooltip.leaflet-interactive{cursor:pointer;pointer-events:auto}.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before,.leaflet-tooltip-top:before{position:absolute;pointer-events:none;border:6px solid transparent;background:0 0;content:""}.leaflet-tooltip-bottom{margin-top:6px}.leaflet-tooltip-top{margin-top:-6px}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before{left:50%;margin-left:-6px}.leaflet-tooltip-top:before{bottom:0;margin-bottom:-12px;border-top-color:#fff}.leaflet-tooltip-bottom:before{top:0;margin-top:-12px;margin-left:-6px;border-bottom-color:#fff}.leaflet-tooltip-left{margin-left:-6px}.leaflet-tooltip-right{margin-left:6px}.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{top:50%;margin-top:-6px}.leaflet-tooltip-left:before{right:0;margin-right:-12px;border-left-color:#fff}.leaflet-tooltip-right:before{left:0;margin-left:-12px;border-right-color:#fff}@media print{.leaflet-control{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+:root{
+  --ground:#F2EFE8; --panel:#FBFAF6; --ink:#1E2826; --ink-2:#5B6663; --line:#D6D2C6;
+  --muni:#E9E5DA; --muni-line:#C9C4B4; --river:#6C9BC4; --river-label:#3E6C96;
+  --pt:#1E6B72; --pt-prot:#C4432B; --spot:#2B2B2B; --focus:#1E6B72; --slider:#1E6B72;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#121A1B; --panel:#1A2324; --ink:#E6E4DC; --ink-2:#9BA6A2; --line:#2E3B3C;
+    --muni:#1C2628; --muni-line:#33413F; --river:#5E93C2; --river-label:#8FBBE0;
+    --pt:#5FC4C9; --pt-prot:#F0755A; --spot:#F2EFE8; --focus:#5FC4C9; --slider:#5FC4C9;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#121A1B; --panel:#1A2324; --ink:#E6E4DC; --ink-2:#9BA6A2; --line:#2E3B3C;
+  --muni:#1C2628; --muni-line:#33413F; --river:#5E93C2; --river-label:#8FBBE0;
+  --pt:#5FC4C9; --pt-prot:#F0755A; --spot:#F2EFE8; --focus:#5FC4C9; --slider:#5FC4C9;
+}
+html,body{height:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:14px/1.5 "IBM Plex Sans KR",system-ui,sans-serif;overflow:hidden}
+#map{position:absolute;inset:0;background:var(--ground)}
+.leaflet-container{background:var(--ground);font:inherit}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--panel);color:var(--ink);box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.leaflet-popup-content{margin:10px 14px;font-size:13px;line-height:1.45}
+.leaflet-popup-content b{font-family:"Gowun Batang",serif;font-size:15px}
+.leaflet-bar a{background:var(--panel);color:var(--ink);border-bottom-color:var(--line)}
+.leaflet-tooltip{background:var(--panel);color:var(--ink);border-color:var(--line)}
+.lbl{font:11px/1.2 "IBM Plex Sans KR",sans-serif;color:var(--ink-2);white-space:nowrap;pointer-events:none;transform:translate(-50%,-50%);display:inline-block;text-shadow:0 0 3px var(--ground),0 0 3px var(--ground)}
+.lbl.big{font-size:12px;font-weight:600;color:var(--ink)}
+.plbl{font:600 13px/1.2 "Gowun Batang",serif;color:var(--ink-2);letter-spacing:.12em;white-space:nowrap;pointer-events:none;transform:translate(-50%,-50%);display:inline-block;opacity:.8;text-shadow:0 0 3px var(--ground),0 0 3px var(--ground)}
+.leaflet-bar a.locate{font-size:16px;line-height:30px}
+.leaflet-bar a.locate.busy{opacity:.5;pointer-events:none}
+.me{width:14px;height:14px;border-radius:50%;background:var(--pt);border:3px solid var(--panel);box-shadow:0 0 0 2px var(--pt),0 2px 6px rgba(0,0,0,.35)}
+.rlbl{font:italic 11px/1.2 "Gowun Batang",serif;color:var(--river-label);white-space:nowrap;pointer-events:none;transform:translate(-50%,-50%);display:inline-block;text-shadow:0 0 3px var(--ground),0 0 3px var(--ground)}
+#panel{position:absolute;top:12px;left:12px;z-index:1000;width:280px;max-height:calc(100% - 24px);display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:6px;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+#panel header{padding:14px 16px 10px;border-bottom:1px solid var(--line)}
+#panel h1{font:700 20px/1.2 "Gowun Batang",serif;margin:0;text-wrap:balance}
+#panel h1 small{display:block;font:500 11px/1.4 "IBM Plex Sans KR",sans-serif;color:var(--ink-2);letter-spacing:.06em;margin-top:4px}
+#controls{padding:10px 16px;display:grid;gap:8px;border-bottom:1px solid var(--line)}
+#q,#place{width:100%;box-sizing:border-box;padding:6px 8px;border:1px solid var(--line);border-radius:4px;background:var(--ground);color:var(--ink);font:inherit}
+#q:focus,#place:focus,#ymin:focus-visible,label:focus-within{outline:2px solid var(--focus);outline-offset:1px}
+.row{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2)}
+.row b{color:var(--ink);font-variant-numeric:tabular-nums;min-width:3ch}
+#ymin{flex:1;accent-color:var(--slider)}
+#list{overflow:auto;flex:1;padding:6px 0}
+.sp{display:flex;align-items:center;gap:8px;padding:5px 16px;cursor:pointer;user-select:none}
+.sp:hover{background:color-mix(in srgb,var(--pt) 10%,transparent)}
+.sp input{margin:0;accent-color:var(--pt)}
+.sp .n{flex:1}
+.sp .sci{display:block;font-size:11px;color:var(--ink-2);line-height:1.2}
+.sp .c{font-variant-numeric:tabular-nums;color:var(--ink-2);font-size:12px;min-width:5ch;text-align:right}
+.sp.prot .n::after{content:"보호종";margin-left:6px;font-size:10px;padding:1px 5px;border-radius:3px;background:var(--pt-prot);color:#fff;vertical-align:1px}
+.sp.off{opacity:.45}
+#stat{padding:8px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-2);display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}
+#stat b{color:var(--ink)}
+#legend{position:absolute;right:12px;bottom:12px;z-index:1000;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--ink-2);display:grid;gap:4px}
+#legend span{display:inline-flex;align-items:center;gap:6px}
+#legend i{display:inline-block;width:10px;height:10px;border-radius:50%}
+#legend .line{width:16px;height:2px;border-radius:0}
+#hint{position:absolute;left:50%;top:12px;transform:translateX(-50%);z-index:1000;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:4px 10px;font-size:12px;color:var(--ink-2)}
+@media (max-width:640px){
+  #panel{left:8px;right:8px;width:auto;top:auto;bottom:8px;max-height:50vh}
+  #legend,#hint{display:none}
+}
+@media (prefers-reduced-motion:no-preference){.sp{transition:background .15s}}
+</style>
+<div id="map"></div>
+<div id="hint">지점 반경 3 km 집계: 지도를 클릭</div>
+<aside id="panel">
+  <header><h1>탐어 지도<small>GBIF 출현 기록 · 전국 · 담수어·새우·다슬기</small></h1></header>
+  <div id="controls">
+    <input id="place" type="search" placeholder="지명·하천명으로 이동 (예: 고산천, 함양)" aria-label="지명 검색" list="places">
+    <datalist id="places"></datalist>
+    <input id="q" type="search" placeholder="어종 검색 (국명·학명)" aria-label="어종 검색">
+    <label class="row" for="ymin">최소 연도 <b id="yv">2010</b><input id="ymin" type="range" min="1980" max="2026" value="2010"></label>
+    <label class="row"><input id="obsonly" type="checkbox"> 관찰 기록만 (박물관 표본 제외)</label>
+  </div>
+  <div id="list" role="listbox" aria-label="어종 목록"></div>
+  <div id="stat"><span>표시 <b id="n">0</b>건</span><span><b id="np">0</b>지점</span></div>
+</aside>
+<div id="legend">
+  <span><i style="background:var(--pt)"></i> 선택 어종 (크기 = 기록 수)</span>
+  <span><i style="background:var(--pt-prot)"></i> 보호종 — 잡히면 즉시 방생</span>
+  <span><i style="background:transparent;border:2px solid var(--spot)"></i> 내 후보 지점</span>
+  <span><i style="background:var(--pt);border:2px solid var(--panel);box-shadow:0 0 0 1px var(--pt)"></i> 현위치 (◎ 버튼)</span>
+  <span><i class="line" style="background:var(--river)"></i> 하천·지류 (OSM) · 이름은 확대 시</span>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="muni.js"></script>
+<script src="rivers.js"></script>
+<script src="points.js"></script>
+<script>
+const SP=window.__SP, D=window.__PTS, MUNI=window.__MUNI, RIVERS=window.__RIVERS, STREAMS=window.__STREAMS, RLABELS=window.__RLABELS, SPOTS=[["완주 고산천 (고산면)",35.98,127.22],["소양천 (호성동)",35.86,127.17],["전주천 상류 (구이)",35.72,127.14],["완주 동상계곡",35.98,127.3],["임실 구담교",35.55,127.28],["순창 장군목",35.5,127.22],["김제 금산사",35.72,127.05],["진안 주자천",35.99,127.42],["함양 위천 (함양읍)",35.52,127.73]];
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const map=L.map('map',{preferCanvas:true}).setView([36.2,127.8],7);
+map.attributionControl.setPrefix('').addAttribution('GBIF · OSM 하천 · 통계청 시군 경계');
+const canvas=L.canvas({padding:.3});
+const muniLayer=L.layerGroup().addTo(map), riverLayer=L.layerGroup().addTo(map), labelLayer=L.layerGroup().addTo(map), ptLayer=L.layerGroup().addTo(map), spotLayer=L.layerGroup().addTo(map);
+const PROV={11:'서울',21:'부산',22:'대구',23:'인천',24:'광주',25:'대전',26:'울산',29:'세종',31:'경기',32:'강원',33:'충북',34:'충남',35:'전북',36:'전남',37:'경북',38:'경남',39:'제주'};
+const muniCenters=[], provCenters=[];
+
+function drawMuni(){
+  muniLayer.clearLayers(); muniCenters.length=0;
+  const acc={};
+  for(const [name,prov,polys] of MUNI){
+    let big=null,bigN=0;
+    for(const poly of polys){
+      const ll=poly.map(r=>r.map(([x,y])=>[y,x]));
+      L.polygon(ll,{renderer:canvas,color:css('--muni-line'),weight:.7,fillColor:css('--muni'),fillOpacity:1,interactive:false}).addTo(muniLayer);
+      if(poly[0].length>bigN){bigN=poly[0].length;big=ll;}
+    }
+    const c=L.polygon(big).getBounds().getCenter();
+    muniCenters.push([name,c,PROV[prov]]);
+    (acc[prov]??=[]).push([c.lat,c.lng]);
+  }
+  // 시도 라벨 위치 = 소속 시군 중심의 평균 (광역시는 도 라벨과 겹치므로 생략)
+  provCenters.length=0;
+  for(const [p,cs] of Object.entries(acc)){
+    if(+p<30 && p!=='29') continue;
+    provCenters.push([PROV[p],L.latLng(cs.reduce((a,b)=>a+b[0],0)/cs.length,cs.reduce((a,b)=>a+b[1],0)/cs.length)]);
+  }
+}
+function drawRivers(){
+  riverLayer.clearLayers();
+  const z=map.getZoom();
+  if(z>=9) for(const [name,pts] of STREAMS) L.polyline(pts,{renderer:canvas,color:css('--river'),weight:1,opacity:.75,interactive:z>=11}).bindTooltip(name,{sticky:true}).addTo(riverLayer);
+  for(const [name,pts] of RIVERS) L.polyline(pts,{renderer:canvas,color:css('--river'),weight:z>=10?2:1.2,opacity:z>=8?1:.7,interactive:z>=10}).bindTooltip(name||'이름 없음',{sticky:true}).addTo(riverLayer);
+}
+// 라벨: 시도명은 줌 ≤8 (8은 시군명과 병기), 시군명은 줌 8+, 하천명은 줌 10+ 이고 화면 안에 있는 것만
+function drawLabels(){
+  labelLayer.clearLayers();
+  const z=map.getZoom(), b=map.getBounds().pad(.1);
+  if(z<=8) for(const [name,c] of provCenters) if(b.contains(c))
+    L.marker(c,{icon:L.divIcon({className:'',html:`<span class="plbl">${name}</span>`,iconSize:[0,0]}),interactive:false}).addTo(labelLayer);
+  if(z>=8) for(const [name,c] of muniCenters) if(b.contains(c))
+    L.marker(c,{icon:L.divIcon({className:'',html:`<span class="lbl${z>=10?' big':''}">${name}</span>`,iconSize:[0,0]}),interactive:false}).addTo(labelLayer);
+  if(z>=10){
+    const seen=new Set();
+    for(const [name,p] of RLABELS){ if(!b.contains(p)||seen.has(name)) continue; seen.add(name);
+      L.marker(p,{icon:L.divIcon({className:'',html:`<span class="rlbl">${name}</span>`,iconSize:[0,0]}),interactive:false}).addTo(labelLayer); }
+  }
+}
+const list=document.getElementById('list'), q=document.getElementById('q'), ymin=document.getElementById('ymin'), yv=document.getElementById('yv'), obsonly=document.getElementById('obsonly');
+const total=new Array(SP.length).fill(0); for(const r of D) for(const [y,c] of r[4]) total[r[2]]+=c;
+const chosen=new Set([Math.max(0,SP.findIndex(s=>s[0]==='밀어'))]);
+function buildList(){
+  list.innerHTML='';
+  const term=q.value.trim().toLowerCase();
+  SP.map((s,i)=>[s,i]).sort((a,b)=>total[b[1]]-total[a[1]]).forEach(([s,i])=>{
+    if(term && !(s[0].includes(term)||s[1].toLowerCase().includes(term))) return;
+    const el=document.createElement('label'); el.className='sp'+(s[2]?' prot':'')+(chosen.has(i)?'':' off');
+    el.innerHTML=`<input type="checkbox" id="sp${i}" ${chosen.has(i)?'checked':''}><span class="n">${s[0]}<span class="sci">${s[1]}</span></span><span class="c">${total[i].toLocaleString()}</span>`;
+    el.querySelector('input').onchange=e=>{e.target.checked?chosen.add(i):chosen.delete(i); el.classList.toggle('off',!e.target.checked); render();};
+    list.appendChild(el);
+  });
+}
+// 행 하나에서 필터 통과 건수
+function countRow(r,y){ if(obsonly.checked&&!r[3]) return 0; let n=0; for(const [yr,c] of r[4]){ if(yr?yr>=y:y<=1980) n+=c; } return obsonly.checked?Math.min(n,r[3]):n; }
+function render(){
+  ptLayer.clearLayers();
+  const y=+ymin.value; yv.textContent=y;
+  let n=0,np=0;
+  for(const r of D){
+    if(!chosen.has(r[2])) continue;
+    const c=countRow(r,y); if(!c) continue;
+    n+=c; np++; const s=SP[r[2]];
+    const yrs=r[4].filter(([yr])=>yr&&yr>=y).map(([yr])=>yr);
+    L.circleMarker([r[1],r[0]],{renderer:canvas,radius:3+Math.min(7,Math.log2(c+1)*1.6),color:s[2]?css('--pt-prot'):css('--pt'),weight:1,fillOpacity:.55})
+     .bindPopup(`<b>${s[0]}</b> <i style="color:${css('--ink-2')}">${s[1]}</i><br>${c}건 · ${yrs.join(', ')||'연도 미상'}`).addTo(ptLayer);
+  }
+  document.getElementById('n').textContent=n.toLocaleString(); document.getElementById('np').textContent=np.toLocaleString();
+}
+function km(a,b){return Math.hypot((a[1]-b[1])*89,(a[0]-b[0])*111);}
+function summarize(lat,lon,title){
+  const y=+ymin.value, cnt=new Map();
+  for(const r of D){ if(!chosen.has(r[2])||km([lat,lon],[r[1],r[0]])>3) continue; const c=countRow(r,y); if(c) cnt.set(r[2],(cnt.get(r[2])||0)+c); }
+  const rows=[...cnt].sort((a,b)=>b[1]-a[1]).slice(0,14).map(([i,c])=>`<tr><td style="${SP[i][2]?'color:'+css('--pt-prot'):''}">${SP[i][0]}</td><td style="text-align:right;padding-left:12px;font-variant-numeric:tabular-nums">${c}</td></tr>`).join('');
+  const tot=[...cnt.values()].reduce((a,b)=>a+b,0);
+  return `<b>${title}</b><br><span style="color:${css('--ink-2')}">반경 3 km · ${y}년 이후 · ${tot}건</span><table style="margin-top:6px;border-collapse:collapse">${rows||'<tr><td>기록 없음</td></tr>'}</table>`;
+}
+// 가장 가까운 시군 중심 → "시군 (도)" 문자열
+function nearMuni(lat,lon){ let best=null,bd=1e9; for(const [name,c,prov] of muniCenters){ const d=km([lat,lon],[c.lat,c.lng]); if(d<bd){bd=d;best=`${name} · ${prov}`;} } return best||''; }
+// 현위치: 마커 + 정확도 원 + 반경 3 km 집계 팝업
+const meLayer=L.layerGroup().addTo(map), hint=document.getElementById('hint'), hint0=hint.textContent;
+let toastT; function toast(msg){ hint.textContent=msg; hint.style.display='block'; clearTimeout(toastT); toastT=setTimeout(()=>{hint.textContent=hint0; hint.style.display='';},4000); }
+function locate(btn){
+  if(!navigator.geolocation){ toast('이 브라우저는 위치 정보를 지원하지 않습니다.'); return; }
+  btn.classList.add('busy');
+  navigator.geolocation.getCurrentPosition(pos=>{
+    btn.classList.remove('busy');
+    const {latitude:lat,longitude:lon,accuracy}=pos.coords;
+    meLayer.clearLayers();
+    L.circle([lat,lon],{radius:Math.min(accuracy,3000),color:css('--pt'),weight:1,fillOpacity:.08,interactive:false}).addTo(meLayer);
+    const m=L.marker([lat,lon],{icon:L.divIcon({className:'',html:'<div class="me"></div>',iconSize:[14,14],iconAnchor:[7,7]}),zIndexOffset:1000}).addTo(meLayer);
+    m.bindPopup(()=>summarize(lat,lon,`현위치 — ${nearMuni(lat,lon)}`));
+    map.setView([lat,lon],Math.max(map.getZoom(),11));
+    m.openPopup();
+  },err=>{
+    btn.classList.remove('busy');
+    toast(err.code===1?'위치 권한이 거부되었습니다. 브라우저 설정에서 허용해 주세요.':'위치를 가져오지 못했습니다.');
+  },{enableHighAccuracy:true,timeout:10000,maximumAge:60000});
+}
+L.Control.Locate=L.Control.extend({onAdd(){ const div=L.DomUtil.create('div','leaflet-bar'); const a=L.DomUtil.create('a','locate',div); a.href='#'; a.title='현위치로 이동'; a.setAttribute('aria-label','현위치로 이동'); a.textContent='◎'; L.DomEvent.on(a,'click',e=>{L.DomEvent.stop(e);locate(a);}); return div; }});
+new L.Control.Locate({position:'topright'}).addTo(map);
+function drawSpots(){
+  spotLayer.clearLayers();
+  for(const [name,lat,lon] of SPOTS){
+    const m=L.circleMarker([lat,lon],{radius:7,color:css('--spot'),weight:2,fillColor:css('--panel'),fillOpacity:.9}).addTo(spotLayer);
+    m.bindTooltip(name,{direction:'top',offset:[0,-6]});
+    m.on('click',()=>m.bindPopup(summarize(lat,lon,name)).openPopup());
+  }
+}
+map.on('click',e=>{ if(map.getZoom()<9) return; L.popup().setLatLng(e.latlng).setContent(summarize(e.latlng.lat,e.latlng.lng,`${nearMuni(e.latlng.lat,e.latlng.lng)}<br><span style="font-weight:400;font-size:12px;color:${css('--ink-2')}">${e.latlng.lat.toFixed(3)}, ${e.latlng.lng.toFixed(3)}</span>`)).openOn(map); });
+// 지명 검색: 시군명 + 하천명
+const place=document.getElementById('place'), dl=document.getElementById('places');
+const gaz=new Map();
+function buildGaz(){
+  for(const [name,c] of provCenters) gaz.set(name,[c,9]);
+  for(const [name,c] of muniCenters) gaz.set(name,[c,10]);
+  for(const [name,p] of RLABELS) if(!gaz.has(name)) gaz.set(name,[L.latLng(p[0],p[1]),12]);
+  dl.innerHTML=[...gaz.keys()].sort().map(n=>`<option value="${n}">`).join('');
+}
+function goPlace(){ const v=place.value.trim(); if(!v) return; let g=gaz.get(v); if(!g){ const k=[...gaz.keys()].find(n=>n.startsWith(v))||[...gaz.keys()].find(n=>n.includes(v)); if(k){ g=gaz.get(k); place.value=k; } } if(g) map.setView(g[0],g[1]); }
+place.onchange=goPlace; place.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); goPlace(); } });
+q.oninput=buildList; ymin.oninput=obsonly.onchange=render;
+map.on('zoomend',()=>{drawRivers();drawLabels();}); map.on('moveend',drawLabels);
+function redrawAll(){drawMuni();drawRivers();drawLabels();drawSpots();render();}
+drawMuni();drawRivers();drawLabels();drawSpots();buildGaz();buildList();render();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',redrawAll);
+new MutationObserver(redrawAll).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+</script>
