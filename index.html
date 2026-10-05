@@ -101,6 +101,11 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--focus);outline-offs
 #tabs button{flex:1} #tabs button[aria-pressed="true"]{background:var(--pt);color:var(--panel)}
 #tabs button{white-space:nowrap;font-size:13px;padding:7px 6px}#tabs button[data-view="fishing"]{flex:1.5}
 .panel-view{overflow:auto;min-height:0;padding:10px 14px}
+#species-panel{padding:0;display:flex;flex-direction:column;min-height:0}
+#panel header,#tabs,#map-layers,#stat{flex-shrink:0}
+#species-filters summary{cursor:pointer;font-size:12px;color:var(--ink-2);padding:5px 0}
+.filter-options{display:grid;gap:8px}
+@media(max-width:640px){#species-panel{display:block;flex:1;overflow:auto;overscroll-behavior:contain}#species-panel #list{overflow:visible}#category{min-height:40px;font-size:16px}}
 .place-card{display:block;width:100%;text-align:left;margin:0 0 8px;padding:10px}
 .place-card small{display:block;color:var(--ink-2)}
 .toolbar{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
@@ -135,18 +140,21 @@ dialog fieldset{border:1px solid var(--line);border-radius:6px;margin:12px 0;pad
     <button type="button" data-view="records" aria-pressed="false">내 기록</button>
   </nav>
   <details id="map-layers"><summary>지도 표시</summary><div class="toolbar"><label><input id="layer-occurrences" type="checkbox" checked>출현 기록</label><label><input id="layer-spots" type="checkbox" checked>후보·방문 장소</label><label><input id="layer-fishing" type="checkbox" checked>낚시 포인트</label></div></details>
-  <div id="controls">
+  <div id="species-panel" class="panel-view"><div id="controls">
     <label class="row" for="category">어종 분류 <select id="category"><option value="freshwater">민물 탐어</option><option value="marine">바다 낚시</option><option value="all">전체</option></select></label>
     <input id="place" type="search" placeholder="지명·하천명으로 이동 (예: 고산천, 함양)" aria-label="지명 검색" list="places">
     <datalist id="places"></datalist>
     <input id="q" type="search" placeholder="어종 검색 (예: 광어, 우럭, 밀어)" aria-label="어종 검색">
+    <details id="species-filters"><summary>기간·관찰·선택 설정</summary><div class="filter-options">
     <label class="row" for="ymin">최소 연도 <b id="yv">2010</b><input id="ymin" type="range" min="1980" max="2026" value="2010"></label>
     <label class="row"><input id="obsonly" type="checkbox"> 관찰 기록만 (박물관 표본 제외)</label>
     <label class="row"><input id="only-selected" type="checkbox"> 선택 어종만 목록에 보기</label>
     <div class="toolbar"><button id="select-all" type="button">전체 선택</button><button id="select-none" type="button">선택 해제</button><button id="share-view" type="button">현재 보기 공유</button></div>
     <div id="data-note"></div>
+    </div></details>
   </div>
   <div id="list" aria-label="어종 목록"></div>
+  </div>
   <div id="places-panel" class="panel-view" hidden><p class="muted">후보 좌표는 추정 위치입니다. 방문 기록과 활동 허용 여부는 별개입니다.</p><label class="row"><input id="favorites-only" type="checkbox"> 즐겨찾기만 보기</label><div id="spot-list"></div></div>
   <div id="fishing-panel" class="panel-view" hidden>
     <p class="muted">🎣 내가 저장한 낚시 포인트입니다. 출현 기록과 별도로 표시하며, 어종·연도 필터의 영향을 받지 않습니다.</p>
@@ -209,11 +217,11 @@ dialog fieldset{border:1px solid var(--line);border-radius:6px;margin:12px 0;pad
   </form>
 </dialog>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="muni.js"></script>
-<script src="rivers.js"></script>
-<script src="points.js"></script>
-<script src="map_core.js"></script>
-<script src="records.js"></script>
+<script src="muni.js?v=74b3f35152051a70"></script>
+<script src="rivers.js?v=8960164a3b93e8d4"></script>
+<script src="points.js?v=07671f9324d0e596"></script>
+<script src="map_core.js?v=248b4af0e68f1c9f"></script>
+<script src="records.js?v=3f98ca5da006bcab"></script>
 <script>
 const SP=window.__SP, D=window.__PTS, MUNI=window.__MUNI, RIVERS=window.__RIVERS, STREAMS=window.__STREAMS, RLABELS=window.__RLABELS, SPOTS=[{"id":"wanju-gosan","name":"완주 고산천 (고산면)","lat":35.98,"lon":127.22,"coordinate_note":"기존 후보 좌표 · 현장 위치 미확인","source":"기존 탐어 지도 후보 목록","verified":false,"access":"미확인","parking":"미확인","child_safety":"미확인","facilities":"미확인","rules":[{"method":"낚시","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"족대","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"통발","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"뜰채","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"맨손","status":"미확인","checked_at":null,"source_url":null,"note":""}]},{"id":"jeonju-soyang","name":"소양천 (호성동)","lat":35.86,"lon":127.17,"coordinate_note":"기존 후보 좌표 · 현장 위치 미확인","source":"기존 탐어 지도 후보 목록","verified":false,"access":"미확인","parking":"미확인","child_safety":"미확인","facilities":"미확인","rules":[{"method":"낚시","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"족대","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"통발","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"뜰채","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"맨손","status":"미확인","checked_at":null,"source_url":null,"note":""}]},{"id":"jeonju-upper","name":"전주천 상류 (구이)","lat":35.72,"lon":127.14,"coordinate_note":"기존 후보 좌표 · 현장 위치 미확인","source":"기존 탐어 지도 후보 목록","verified":false,"access":"미확인","parking":"미확인","child_safety":"미확인","facilities":"미확인","rules":[{"method":"낚시","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"족대","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"통발","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"뜰채","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"맨손","status":"미확인","checked_at":null,"source_url":null,"note":""}]},{"id":"wanju-dongsang","name":"완주 동상계곡","lat":35.98,"lon":127.3,"coordinate_note":"기존 후보 좌표 · 현장 위치 미확인","source":"기존 탐어 지도 후보 목록","verified":false,"access":"미확인","parking":"미확인","child_safety":"미확인","facilities":"미확인","rules":[{"method":"낚시","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"족대","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"통발","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"뜰채","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"맨손","status":"미확인","checked_at":null,"source_url":null,"note":""}]},{"id":"imsil-gudam","name":"임실 구담교","lat":35.55,"lon":127.28,"coordinate_note":"기존 후보 좌표 · 현장 위치 미확인","source":"기존 탐어 지도 후보 목록","verified":false,"access":"미확인","parking":"미확인","child_safety":"미확인","facilities":"미확인","rules":[{"method":"낚시","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"족대","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"통발","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"뜰채","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"맨손","status":"미확인","checked_at":null,"source_url":null,"note":""}]},{"id":"sunchang-janggunmok","name":"순창 장군목","lat":35.5,"lon":127.22,"coordinate_note":"기존 후보 좌표 · 현장 위치 미확인","source":"기존 탐어 지도 후보 목록","verified":false,"access":"미확인","parking":"미확인","child_safety":"미확인","facilities":"미확인","rules":[{"method":"낚시","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"족대","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"통발","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"뜰채","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"맨손","status":"미확인","checked_at":null,"source_url":null,"note":""}]},{"id":"gimje-geumsansa","name":"김제 금산사","lat":35.72,"lon":127.05,"coordinate_note":"기존 후보 좌표 · 현장 위치 미확인","source":"기존 탐어 지도 후보 목록","verified":false,"access":"미확인","parking":"미확인","child_safety":"미확인","facilities":"미확인","rules":[{"method":"낚시","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"족대","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"통발","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"뜰채","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"맨손","status":"미확인","checked_at":null,"source_url":null,"note":""}]},{"id":"jinan-juja","name":"진안 주자천","lat":35.99,"lon":127.42,"coordinate_note":"기존 후보 좌표 · 현장 위치 미확인","source":"기존 탐어 지도 후보 목록","verified":false,"access":"미확인","parking":"미확인","child_safety":"미확인","facilities":"미확인","rules":[{"method":"낚시","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"족대","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"통발","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"뜰채","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"맨손","status":"미확인","checked_at":null,"source_url":null,"note":""}]},{"id":"hamyang-wicheon","name":"함양 위천 (함양읍)","lat":35.52,"lon":127.73,"coordinate_note":"기존 후보 좌표 · 현장 위치 미확인","source":"기존 탐어 지도 후보 목록","verified":false,"access":"미확인","parking":"미확인","child_safety":"미확인","facilities":"미확인","rules":[{"method":"낚시","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"족대","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"통발","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"뜰채","status":"미확인","checked_at":null,"source_url":null,"note":""},{"method":"맨손","status":"미확인","checked_at":null,"source_url":null,"note":""}]}];
 const COLLECTION={"marine":{"bbox":[124.5,33.0,131.0,38.7],"filters":{"hasCoordinate":"true","hasGeospatialIssue":"false","country":"KR","occurrenceStatus":"PRESENT"},"category":"marine","species_collected_at":{"넙치":"2026-10-04T22:41:25.494256+00:00","조피볼락":"2026-10-04T22:41:34.356966+00:00"},"generated_at":"2026-10-04T22:41:34.770293+00:00"}};
@@ -435,7 +443,7 @@ document.getElementById('close-spot').onclick=()=>document.getElementById('spot-
 function setViewTab(view){
   if(mobile.matches) setSheet(true);
   document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===view)));
-  document.getElementById('controls').hidden=view!=='species';list.hidden=view!=='species';
+  document.getElementById('species-panel').hidden=view!=='species';
   document.getElementById('places-panel').hidden=view!=='places';document.getElementById('records-panel').hidden=view!=='records';
   document.getElementById('fishing-panel').hidden=view!=='fishing';
 }
@@ -455,6 +463,7 @@ category.onchange=()=>{
 updateDataNote();
 // 모바일 하단 시트 토글
 const panel=document.getElementById('panel'), toggle=document.getElementById('toggle'), mobile=matchMedia('(max-width:640px)');
+document.getElementById('species-filters').open=!mobile.matches;
 function setSheet(open){ panel.classList.toggle('closed',!open); toggle.setAttribute('aria-expanded',String(open)); }
 panel.querySelector('header').addEventListener('click',()=>{ if(mobile.matches) setSheet(panel.classList.contains('closed')); });
 if(mobile.matches) setSheet(false);
@@ -500,5 +509,5 @@ new MutationObserver(redrawAll).observe(document.documentElement,{attributes:tru
 window.FishingMap={allSpots,showSpot,setViewTab,setPersonal(data){personalRecords=data;drawSpots();buildSpotList();buildFishingList();},onNewTrip:null,onEditFishing:null,showFishing(){document.getElementById('layer-fishing').checked=true;fishingLayer.addTo(map);setViewTab('fishing');}};
 </script>
 
-<script src="records_ui.js"></script>
+<script src="records_ui.js?v=e87025e00aa76c88"></script>
 </html>
